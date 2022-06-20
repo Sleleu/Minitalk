@@ -1,10 +1,33 @@
 # Minitalk
 
+Le but de ce projet est de realiser un programme de communication sous la forme d'un client et d'un serveur. Le serveur devra etre lance en premier et doit afficher son PID, tandis que le client prendra en parametre le PID du serveur ainsi qu'une chaine de caracteres a transmettre. Le client doit communiquer au serveur la chaîne passée en paramètre et l’afficher rapidement.
+
+Fonctions autorisees :
+
+- write
+- ft_printf et tout équivalent que VOUS avez codé
+- signal
+- sigemptyset
+- sigaddset
+- sigaction
+- kill
+- getpid
+- malloc
+- free
+- pause
+- sleep
+- usleep
+- exit
+
 Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
 
-Fonction sigaction
+**Fonction sigaction**
 ```c
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
+Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique.
+
+
 Fonction getpid :
 ```c
 pid_t getpid(void);
