@@ -21,11 +21,24 @@ Fonctions autorisees :
 
 Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
 
-**Fonction sigaction**
+## Les fonctions
+
+### sigaction
 ```c
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
 Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique.
+La structure de sigaction est la suivante :
+```c
+struct sigaction {
+    void     (*sa_handler) (int);
+    void     (*sa_sigaction) (int, siginfo_t *, void *);
+    sigset_t   sa_mask;
+    int        sa_flags;
+    void     (*sa_restorer) (void);
+};
+```
+
 
 
 Fonction getpid :
@@ -38,9 +51,7 @@ Fonction kill :
 ```c
 int kill(pid_t pid, int sig);
 ```
-kill permet d'envoyer n'importe quel signal a n'importe quel processus. 
-- Si le PID est positif, le signal sig est envoye au processus dont l'identifiant est indique grace au PID.
-- Si le PID vaut 0, le sig est envoyes a tous les processus du meme groupe que le processus appelant
+kill permet d'envoyer n'importe quel signal a n'importe quel processus. kill retourne 0 en cas de succes, et -1 en cas d'echec.
 
 ## Usefull links
 
