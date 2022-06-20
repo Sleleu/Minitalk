@@ -32,7 +32,7 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique. sigaction retourne 0 en cas de succes, -1 en cas d'erreur.
 
 - signum : La variable signal, tel que **SIGUSR1** ou **SIGUSR2**
-- sigaction *act : 
+- sigaction act : Prends la structure de sigaction
 
 La structure de sigaction est la suivante :
 ```c
@@ -44,7 +44,8 @@ struct sigaction {
     void     (*sa_restorer) (void);
 };
 ```
-
+Sigaction necessite une fonction handler, qui remplace et change le signal recu par sigaction. Le signum passe a sigaction ira dans cette fonction handler.
+sa_handler permet de declarer quel gestionnaire est utilise si le signal est passe a la structure sa.
 
 ### getpid
 ```c
@@ -67,3 +68,4 @@ pause force le procesus a s'endormir jusqu'a ce qu'un signal soit recu, qui le t
 ## Usefull links
 
 [Youtube, CodeVault, Short introduction to signals in C](https://www.youtube.com/watch?v=5We_HtLlAbs)
+[Youtube, Codevault, Communicating between processes using signals](https://www.youtube.com/watch?v=PErrlOx3LYE)
