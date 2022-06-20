@@ -32,6 +32,7 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique. sigaction retourne 0 en cas de succes, -1 en cas d'erreur.
 
 - signum : La variable signal, tel que **SIGUSR1** ou **SIGUSR2**
+- sigaction *act : 
 
 La structure de sigaction est la suivante :
 ```c
