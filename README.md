@@ -2,6 +2,8 @@
 
 Le but de ce projet est de realiser un programme de communication sous la forme d'un client et d'un serveur. Le serveur devra etre lance en premier et doit afficher son PID, tandis que le client prendra en parametre le PID du serveur ainsi qu'une chaine de caracteres a transmettre. Le client doit communiquer au serveur la chaîne passée en paramètre et l’afficher rapidement.
 
+Le serveur doit povoir recevoir des chaines de plusieurs clients a la suite sans devoir etre relance, la communication doit se faire uniquement avec des signaux UNIX, les seuls signaux utilisables etant SIGUSR1 et SUGUSR2.
+
 Fonctions autorisees :
 
 - write
@@ -41,17 +43,23 @@ struct sigaction {
 
 
 
-Fonction getpid :
+### getpid
 ```c
 pid_t getpid(void);
 ```
 Cette fonction renvoie l'identifiant de processus (PID) appelant.
 
-Fonction kill :
+### kill
 ```c
 int kill(pid_t pid, int sig);
 ```
 kill permet d'envoyer n'importe quel signal a n'importe quel processus. kill retourne 0 en cas de succes, et -1 en cas d'echec.
+
+### pause
+```c
+int pause(void);
+```
+pause force le procesus a s'endormir jusqu'a ce qu'un signal soit recu, qui le termine ou lui fasse invoquer une fonction de gestionnaire de signal.
 
 ## Usefull links
 
