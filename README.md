@@ -29,7 +29,10 @@ Le man de la fonction signal precisant par lui-meme de preferer la fonction siga
 ```c
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 ```
-Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique.
+Cette fonction permet de modifier l'action effectuee par un processus a la reception d'un signal specifique. sigaction retourne 0 en cas de succes, -1 en cas d'erreur.
+
+- signum : La variable signal, tel que **SIGUSR1** ou **SIGUSR2**
+
 La structure de sigaction est la suivante :
 ```c
 struct sigaction {
@@ -40,7 +43,6 @@ struct sigaction {
     void     (*sa_restorer) (void);
 };
 ```
-
 
 
 ### getpid
