@@ -21,6 +21,16 @@ Fonctions autorisees :
 - usleep
 - exit
 
+## Les notions du projet
+
+### Processus
+
+Un processus est un programme en cours d'execution, a ne pas confondre avec le programme lui-meme. Chaque processus dispose d'un PID (Process Identification) 
+
+### Signal
+
+Un signal est un mecanisme permettant d'envoyer un message a un processus. Les signaux sont utilises pour terminer un processus, le modifier
+
 ## Les fonctions
 
 Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
@@ -44,8 +54,11 @@ struct sigaction {
     void     (*sa_restorer) (void);
 };
 ```
-Sigaction necessite une fonction handler, qui remplace et change le signal recu par sigaction. Le signum passe a sigaction ira dans cette fonction handler.
-sa_handler permet de declarer quel gestionnaire est utilise si le signal est passe a la structure sa.
+Sigaction nécessite une fonction handler, qui remplace et change le signal recu par sigaction. 
+
+Le `signum` passé a sigaction (SIGUSR) ira dans cette fonction handler.
+
+`sa_handler` permet de declarer quel gestionnaire est utilisé si le signal est passe a la structure sa.
 
 ### getpid
 ```c
@@ -67,5 +80,7 @@ pause force le procesus a s'endormir jusqu'a ce qu'un signal soit recu, qui le t
 
 ## Usefull links
 
-[Youtube, CodeVault, Short introduction to signals in C](https://www.youtube.com/watch?v=5We_HtLlAbs)
-[Youtube, Codevault, Communicating between processes using signals](https://www.youtube.com/watch?v=PErrlOx3LYE)
+- [Youtube, CodeVault, Short introduction to signals in C](https://www.youtube.com/watch?v=5We_HtLlAbs)
+- [Youtube, Codevault, Communicating between processes using signals](https://www.youtube.com/watch?v=PErrlOx3LYE)
+- https://sites.uclouvain.be/SystInfo/notes/Theorie/Fichiers/fichiers-signaux.html
+- 
