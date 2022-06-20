@@ -21,9 +21,9 @@ Fonctions autorisees :
 - usleep
 - exit
 
-Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
-
 ## Les fonctions
+
+Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
 
 ### sigaction
 ```c
