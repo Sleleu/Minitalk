@@ -1,5 +1,10 @@
 # Minitalk
 
+Le man de la fonction signal precisant par lui-meme de preferer la fonction sigaction pour eviter les comportements variables selon la version d'Unix utilisee, on se tournera plutot sur sigaction pour ce projet.
+
+Fonction sigaction
+```c
+```
 Fonction getpid :
 ```c
 pid_t getpid(void);
