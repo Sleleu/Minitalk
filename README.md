@@ -29,7 +29,9 @@ Un processus est un programme en cours d'execution, a ne pas confondre avec le p
 
 ### Signal
 
-Un signal est un mecanisme permettant d'envoyer un message a un processus. Les signaux sont utilises pour terminer un processus, le modifier
+Un signal est un mecanisme permettant d'envoyer un message a un processus. Les signaux sont utilises pour terminer un processus, le modifier, etc..
+
+Les sginaux SIGUSR1 et SIGUSR2 autorises par le sujet sont des signaux dont l'utilisation est librement geree par l'utilisateur. Dans le cadre de ce projet, on pourra les utiliser pour interpreter du binaire
 
 ## Les fonctions
 
