@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:34:13 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 02:13:34 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:40:18 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <stdlib.h>
 # include <signal.h>
 #include "ft_printf/ft_printf.h"
+
+typedef struct s_struct
+{
+	int	byte;
+	char	octet;
+	char	*message;
+}		t_struct;
 
 /* utils */
 void	*ft_memset(void *b, int c, size_t len);

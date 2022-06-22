@@ -6,25 +6,20 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:05:57 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 02:45:31 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:12:08 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void ft_send_signal(int pid, char *argv)
+void ft_send_signal(int pid, char octet)
 {
 	int	i;
-	int j;
 
-	i = 0;
-	while (argv[i])
+	i = 7;
+	while (i >= 0)
 	{
-		j = 7;
-		
-		while (j >= 0)
-		{
-			if (argv[i] & 1 << j)
+			if (octet & 1 << i)
 			{
 				ft_printf("1");
 				kill(pid, SIGUSR1);
@@ -35,55 +30,21 @@ void ft_send_signal(int pid, char *argv)
 				kill(pid, SIGUSR2);
 			}
 			usleep(100);
-			j--;
-		}		
-		i++;
-	}
+			i--;
+	}		
 }
-/*
-void	ft_send_len(int pid, char *argv)
-{
-	char *str;
-	int	len;
-	int i;
-	int j;
-
-	i = 4;
-	len = ft_strlen(argv);
-	str = ft_itoa(len);
-//	ft_send_signal(pid, str);
-
-	//while (i >= 0)
-//	{
-		j = 32;
-		while (j >= 0)
-		{
-			if (len & 1 << j)
-			{
-				ft_printf("1");
-				kill(pid, SIGUSR1);
-			}
-			else
-			{
-				ft_printf("0");
-				kill(pid, SIGUSR2);
-			}
-			usleep(100);
-			j--;
-		}
-	//	i--;
-	//}
-}*/
 
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	pid_t	pid;
+	int i = 0;
 
 	pid = ft_atoi(argv[1]);
-ft_printf ("\n IN CLIENT LEN = \n");
-//	ft_send_len(pid, argv[2]);
-ft_printf ("\n IN CLIENT SIGNAL = \n");
-	ft_send_signal(pid, argv[2]);
+	while (argv[2][i])
+	{
+		ft_send_signal(pid, argv[2][i]);
+		i++;
+	}
 	return (0);
 }

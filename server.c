@@ -6,44 +6,37 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 02:39:56 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:42:48 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+t_struct data;
+
 void	ft_handler(int signum)
 {
 	static int i = 0;
-	char 	*receive = NULL;
-	char	octet[8];
-
-	if (i == 7)
-	{
-		ft_printf("Octet : %s", octet);
-		receive = ft_strjoin(receive, octet);
-		ft_printf("receive : %s", receive);
-		//ft_bzero(octet, 8);
-		i = 0;
-	}
-
-	if (signum == SIGUSR1)
-			octet[i] = '1';
-	else
-	{
-		octet[i] = '0';
-		//usleep(100);
-		//i++;
-	}
-	i++;
-	/*else
-	{
-		if (signum == SIGUSR1)
-			ft_printf("1");
-		else
+	
+		if (signum == SIGUSR2)
+		{
+			data.octet <<= 1;
 			ft_printf("0");
-		usleep(100);
-	}*/
+		}
+		else
+		{
+			data.octet <<= 1;
+			data.octet |= 1;
+			ft_printf("1");
+		}
+		i++;
+		if (i == 8)
+		{
+			ft_printf("\nOctet : ");
+			ft_putchar_fd(data.octet, 1);
+			ft_printf("\n");
+			i = 0;
+		}
 }
 
 int	main(int argc, char **argv)
