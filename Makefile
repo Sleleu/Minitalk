@@ -3,10 +3,8 @@ SERVER = server
 CLIENT = client
 
 SRC_SERVER = server.c\
-			utils.c\
 
 SRC_CLIENT = client.c\
-			utils.c\
 
 SRC_PRINTF = ft_printf/ft_format.c\
 			 ft_printf/ft_printf.c\
