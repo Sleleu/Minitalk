@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:05:57 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 22:52:50 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 00:04:04 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main(int argc, char **argv)
 		i++;
 		nb_bytes++;
 	}
-	if (!argv[2][i])
-		ft_send_signal(pid, '\0');
+	ft_send_signal(pid, '\0');
 	return (0);
 }

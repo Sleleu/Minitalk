@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 22:52:22 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 00:02:23 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*ft_charjoin(char *s1, char s2)
 void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 {
 	static int i = 0;
+
 	(void)tmp;
 	g_data.client_pid = c_pid->si_pid;
 	if (signum == SIGUSR1)
@@ -64,8 +65,7 @@ void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 		g_data.message = ft_charjoin(g_data.message, g_data.octet);
 		if (!g_data.octet)
 		{
-			ft_putstr_fd(g_data.message, 1);
-			write(1, "\n", 1);
+			ft_printf("%s\n", g_data.message);
 			free(g_data.message);
 			g_data.message = NULL;
 			kill(g_data.client_pid, SIGUSR1);
@@ -95,7 +95,7 @@ int	main(void)
 					ft_printf(RED"❌ Sigaction Error !❌\n"END);
 					exit(EXIT_FAILURE);
 			}
-		pause();
 	}
+		pause();
 	return (0);
 }
