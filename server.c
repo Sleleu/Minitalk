@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/21 22:56:29 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 02:39:56 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,36 @@
 
 void	ft_handler(int signum)
 {
-	int i = 0;
-	
+	static int i = 0;
+	char 	*receive = NULL;
+	char	octet[8];
+
+	if (i == 7)
+	{
+		ft_printf("Octet : %s", octet);
+		receive = ft_strjoin(receive, octet);
+		ft_printf("receive : %s", receive);
+		//ft_bzero(octet, 8);
+		i = 0;
+	}
+
 	if (signum == SIGUSR1)
-		ft_printf("1");
+			octet[i] = '1';
 	else
-		ft_printf("0");
-	usleep(100);
+	{
+		octet[i] = '0';
+		//usleep(100);
+		//i++;
+	}
 	i++;
+	/*else
+	{
+		if (signum == SIGUSR1)
+			ft_printf("1");
+		else
+			ft_printf("0");
+		usleep(100);
+	}*/
 }
 
 int	main(int argc, char **argv)
@@ -43,7 +65,6 @@ int	main(int argc, char **argv)
 			ft_printf("Error\n");
 			exit(EXIT_FAILURE);
 		}
-		printf ("test");
 		pause();
 	}
 	return (0);

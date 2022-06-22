@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:05:57 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 00:45:11 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 02:45:31 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void ft_send_signal(int pid, char *argv)
 		i++;
 	}
 }
-
+/*
 void	ft_send_len(int pid, char *argv)
 {
 	char *str;
@@ -48,17 +48,17 @@ void	ft_send_len(int pid, char *argv)
 	int i;
 	int j;
 
-	i = 10;
+	i = 4;
 	len = ft_strlen(argv);
 	str = ft_itoa(len);
 //	ft_send_signal(pid, str);
 
-	while (i >= 0)
-	{
-		j = 7;
+	//while (i >= 0)
+//	{
+		j = 32;
 		while (j >= 0)
 		{
-			if (str && *(str+i) && str[i] & 1 << j)
+			if (len & 1 << j)
 			{
 				ft_printf("1");
 				kill(pid, SIGUSR1);
@@ -71,9 +71,9 @@ void	ft_send_len(int pid, char *argv)
 			usleep(100);
 			j--;
 		}
-		i--;
-	}
-}
+	//	i--;
+	//}
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 
 	pid = ft_atoi(argv[1]);
 ft_printf ("\n IN CLIENT LEN = \n");
-	ft_send_len(pid, argv[2]);
+//	ft_send_len(pid, argv[2]);
 ft_printf ("\n IN CLIENT SIGNAL = \n");
 	ft_send_signal(pid, argv[2]);
 	return (0);

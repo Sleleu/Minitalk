@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 19:59:54 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/21 22:39:13 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 02:14:18 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,45 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (result * sign);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*str;
+
+	str = s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		size;
+	int		i;
+	char	*tab;
+
+	i = 0;
+	size = (ft_strlen(s1) + ft_strlen(s2));
+	tab = malloc(sizeof(char) * size + 1);
+	if (tab == NULL)
+		return (NULL);
+	while (s1 && s1[i])
+	{
+		tab[i] = s1[i];
+		i++;
+	}
+	while (*s2)
+	{
+		tab[i] = *s2;
+		i++;
+		s2++;
+	}
+	tab[size] = '\0';
+	free(s1);
+	return (tab);
 }
