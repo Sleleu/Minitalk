@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/22 15:42:48 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:59:43 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@ void	ft_handler(int signum)
 		if (signum == SIGUSR2)
 		{
 			data.octet <<= 1;
-			ft_printf("0");
+			//ft_printf("0");
 		}
 		else
 		{
 			data.octet <<= 1;
 			data.octet |= 1;
-			ft_printf("1");
+			//ft_printf("1");
 		}
 		i++;
 		if (i == 8)
 		{
-			ft_printf("\nOctet : ");
+			//ft_printf("\nOctet : ");
+		//	ft_add_octet(data.message, data.octet);
 			ft_putchar_fd(data.octet, 1);
-			ft_printf("\n");
+			//ft_printf("\n");
+			data.octet = 0;
 			i = 0;
 		}
 }
@@ -49,6 +51,7 @@ int	main(int argc, char **argv)
 	sa.sa_handler = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
 	pid = getpid();
+	data.message = NULL;
 	ft_printf("PID : %d\n", pid);
 	while (42)
 	{
