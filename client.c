@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:05:57 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/23 00:04:04 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 00:46:11 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ void ft_send_signal(int pid, char octet)
 
 int	main(int argc, char **argv)
 {
+	int i;
+	pid_t	pid;
+	struct sigaction sa;
+
 	if (argc != 3)
 		ft_client_error(1);
-	struct sigaction sa;
+	i = 0;
 	sa.sa_handler = ft_end_signal;
-	pid_t	pid;
-	int i = 0;
-
 	pid = ft_atoi(argv[1]);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		ft_client_error(2);

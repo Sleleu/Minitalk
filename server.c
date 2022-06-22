@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/23 00:02:23 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 00:46:40 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 		g_data.message = ft_charjoin(g_data.message, g_data.octet);
 		if (!g_data.octet)
 		{
-			ft_printf("%s\n", g_data.message);
+			ft_printf("SIZE %d - %s\n", ft_strlen(g_data.message), g_data.message);
 			free(g_data.message);
 			g_data.message = NULL;
 			kill(g_data.client_pid, SIGUSR1);
-			usleep(100);
 		}
 		i = 0;
 	}
