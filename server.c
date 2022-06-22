@@ -6,7 +6,7 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/23 00:46:40 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 01:47:41 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ char	*ft_charjoin(char *s1, char s2)
 		tab[i] = s1[i];
 		i++;
 	}
-	if (s2)
-		tab[i] = s2;
+	tab[i] = s2;
 	tab[size] = '\0';
 	free(s1);
 	return (tab);
@@ -65,11 +64,13 @@ void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 		g_data.message = ft_charjoin(g_data.message, g_data.octet);
 		if (!g_data.octet)
 		{
-			ft_printf("SIZE %d - %s\n", ft_strlen(g_data.message), g_data.message);
+			ft_printf("🔹 %s\n", g_data.message);
 			free(g_data.message);
 			g_data.message = NULL;
 			kill(g_data.client_pid, SIGUSR1);
+			usleep(100);
 		}
+		g_data.octet = 0;
 		i = 0;
 	}
 }
@@ -80,9 +81,9 @@ int	main(void)
 	pid_t	pid;
 
 	pid = getpid();
-	ft_printf(GREEN"🐸 Welcome to minitalk ! 🐸\n"END);
-	ft_printf(CYAN"🌈 Current PID of the server : "END);
-	ft_printf(YELLOW "%d\n"END, pid);
+	ft_printf(GREEN"\n  🐸 Welcome to minitalk ! 🐸\n"END);
+	ft_printf(CYAN"  🌈 Current PID of the server : "END);
+	ft_printf(YELLOW "%d\n\n"END, pid);
 	sa.sa_sigaction = ft_handler;
 	sa.sa_flags = SA_SIGINFO;
 	g_data.message = NULL;
