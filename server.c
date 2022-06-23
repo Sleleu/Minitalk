@@ -6,23 +6,13 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:05:56 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/23 01:47:41 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 03:51:14 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 t_struct	g_data;
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
-}
 
 char	*ft_charjoin(char *s1, char s2)
 {
@@ -31,8 +21,10 @@ char	*ft_charjoin(char *s1, char s2)
 	char	*tab;
 
 	i = 0;
-	size = (ft_strlen(s1) + 1);
-	tab = malloc(sizeof(char) * (size + 1));
+	size = 0;
+	while (s1 && s1[size])
+		size++;
+	tab = malloc(sizeof(char) * (size + 2));
 	if (tab == NULL)
 		return (NULL);
 	while (s1 && s1[i])
@@ -40,14 +32,15 @@ char	*ft_charjoin(char *s1, char s2)
 		tab[i] = s1[i];
 		i++;
 	}
-	tab[i] = s2;
-	tab[size] = '\0';
+	tab[i++] = s2;
+	tab[i] = '\0';
 	free(s1);
 	return (tab);
 }
+
 void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 {
-	static int i = 0;
+	static int	i = 0;
 
 	(void)tmp;
 	g_data.client_pid = c_pid->si_pid;
@@ -70,7 +63,6 @@ void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 			kill(g_data.client_pid, SIGUSR1);
 			usleep(100);
 		}
-		g_data.octet = 0;
 		i = 0;
 	}
 }
@@ -78,7 +70,7 @@ void	ft_handler(int signum, siginfo_t *c_pid, void *tmp)
 int	main(void)
 {
 	struct sigaction	sa;
-	pid_t	pid;
+	pid_t				pid;
 
 	pid = getpid();
 	ft_printf(GREEN"\n  🐸 Welcome to minitalk ! 🐸\n"END);
@@ -91,11 +83,11 @@ int	main(void)
 	{
 		if (sigaction(SIGUSR1, &sa, NULL) == -1
 			|| sigaction(SIGUSR2, &sa, NULL) == -1)
-			{
-					ft_printf(RED"❌ Sigaction Error !❌\n"END);
-					exit(EXIT_FAILURE);
-			}
+		{
+			ft_printf(RED"❌ Sigaction Error !❌\n"END);
+			exit(EXIT_FAILURE);
+		}
 	}
-		pause();
+	pause();
 	return (0);
 }

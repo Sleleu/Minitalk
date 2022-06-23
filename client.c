@@ -6,13 +6,13 @@
 /*   By: sleleu <sleleu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:05:57 by sleleu            #+#    #+#             */
-/*   Updated: 2022/06/23 01:31:19 by sleleu           ###   ########.fr       */
+/*   Updated: 2022/06/23 03:47:07 by sleleu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-unsigned int	nb_bytes = 0;
+unsigned int	g_bits = 0;
 
 int	ft_atoi(char *str)
 {
@@ -37,54 +37,55 @@ int	ft_atoi(char *str)
 	return (result * sign);
 }
 
-void ft_client_error(int i)
+void	ft_client_error(int i)
 {
 	if (i == 1)
-		ft_printf(RED"❌ ERROR : Invalid argument ! ❌\n"END);
+		ft_printf(RED"❌ ERROR : Invalid argument ❌\n"END);
 	else if (i == 2)
-		ft_printf(RED"❌ Sigaction Error ! ❌\n"END);
+		ft_printf(RED"❌ Sigaction Error ❌\n"END);
 	else if (i == 3)
 		ft_printf(RED"❌ ERROR : Bad PID ❌\n"END);
 	exit(EXIT_FAILURE);
 }
 
-void ft_end_signal(int signum)
+void	ft_end_signal(int signum)
 {
 	if (signum == SIGUSR1)
 	{
-		ft_printf(GREEN"⚡ %d bytes "END, nb_bytes);
+		ft_printf(GREEN"⚡ %d bits "END, g_bits);
 		ft_printf(YELLOW"successfully sent ! ⚡\n"END);
 	}
 }
 
-void ft_send_signal(int pid, char octet)
+void	ft_send_signal(int pid, char octet)
 {
 	int	i;
+
 	if (pid <= 0)
 		ft_client_error(3);
 	i = 7;
 	while (i >= 0)
 	{
-			if (octet & 1 << i)
-			{
-				if (kill(pid, SIGUSR1) != 0)
-					ft_client_error(3);
-			}
-			else
-			{
-				if (kill(pid, SIGUSR2) != 0)
-					ft_client_error(3);
-			}
-			usleep(100);
-			i--;
+		if (octet & 1 << i)
+		{
+			if (kill(pid, SIGUSR1) != 0)
+				ft_client_error(3);
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2) != 0)
+				ft_client_error(3);
+		}
+		usleep(400);
+		i--;
 	}		
 }
 
 int	main(int argc, char **argv)
 {
-	int i;
-	pid_t	pid;
-	struct sigaction sa;
+	int					i;
+	pid_t				pid;
+	struct sigaction	sa;
 
 	if (argc != 3)
 		ft_client_error(1);
@@ -97,7 +98,7 @@ int	main(int argc, char **argv)
 	{
 		ft_send_signal(pid, argv[2][i]);
 		i++;
-		nb_bytes++;
+		g_bits += 8;
 	}
 	ft_send_signal(pid, '\0');
 	return (0);
